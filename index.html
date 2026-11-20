@@ -13,8 +13,8 @@
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<link rel="preload" as="image" href="assets/hero-v-m.webp" media="(max-width: 860px)" fetchpriority="high"/>
-<link rel="preload" as="image" href="assets/hero-v.webp" media="(min-width: 861px)" fetchpriority="high"/>
+<link rel="preload" as="image" href="assets/hero-m.webp" media="(max-width: 860px)" fetchpriority="high"/>
+<link rel="preload" as="image" href="assets/hero.webp" media="(min-width: 861px)" fetchpriority="high"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
@@ -308,7 +308,7 @@
     <a class="bar__mark" href="#top"><i aria-hidden="true"></i>Просвет</a>
     <nav class="bar__right" aria-label="Быстрые ссылки">
       <a class="bar__tel" href="tel:+79005550137">+7 900 555-01-37</a>
-      <a class="v-btn" href="#zapis" rel="noopener">Записаться на диагностику</a>
+      <a class="v-btn" href="#booking" data-book-open rel="noopener">Записаться на диагностику</a>
     </nav>
   </header>
 
@@ -319,8 +319,8 @@
       <div data-v-stage="">
         <div class="v-layer hero__back" data-v-parallax="-0.7">
           <picture>
-            <source media="(max-width: 860px)" srcset="assets/hero-v-m.webp"/>
-            <img src="assets/hero-v.webp" alt="" width="1920" height="1080" fetchpriority="high"/>
+            <source media="(max-width: 860px)" srcset="assets/hero-m.webp"/>
+            <img src="assets/hero.webp" alt="" width="1920" height="1080" fetchpriority="high"/>
           </picture>
         </div>
         <div class="hero__top" aria-hidden="true"></div>
@@ -340,10 +340,12 @@
 
         <div class="v-copy v-copy--lead hero__copy" data-v-cue="0 1 0 0">
           <span class="v-label hero__label">Ремонт, ТО и детейлинг по записи</span>
+          <p class="hero__subline">Приём на диагностику – по записи</p>
+          <p class="hero__schedule"><b>График работы:</b> ежедневно 9:00–21:00 · интервал обслуживания 45 минут</p>
           <h1 class="v-display v-display--xl hero__title">Автосервис и детейлинг<span class="hero__title-sub">в Серпухове: показываем, что сделали</span></h1>
           <p class="v-lede">Согласование до работы, фото узлов до и после, машина в оговорённый срок. Цена типовых работ – до приезда.</p>
           <div class="hero__cta">
-            <a class="v-btn" href="#zapis" rel="noopener">Записаться на диагностику</a>
+            <a class="v-btn" href="#booking" data-book-open rel="noopener">Записаться на диагностику</a>
             <a class="hero__tel" href="tel:+79005550137">или позвоните <b>+7 900 555-01-37</b></a>
           </div>
         </div>
@@ -522,7 +524,7 @@
             <h2 class="v-display v-display--lg">Запишитесь на диагностику на удобное время</h2>
             <p class="v-lede">Напишите марку, год и что беспокоит. Ответим временем приёма и ценой на типовые работы – до приезда.</p>
             <div class="close__cta">
-              <a class="v-btn" data-v-magnet="0.22" href="#zapis" rel="noopener">Записаться на диагностику</a>
+              <a class="v-btn" data-v-magnet="0.22" href="#booking" data-book-open rel="noopener">Записаться на диагностику</a>
               <a class="close__tel" href="tel:+79005550137">+7 900 555-01-37</a>
             </div>
             <p class="close__hint">В мессенджере отвечаем в часы работы. Не любите писать – звоните, время и цену назовём по телефону.</p>
@@ -586,4 +588,212 @@
   <span style="width:8px;height:8px;border-radius:50%;background:#4de3c1;"></span>
   Демо-сайт · Сделано в НейроСтудии · +7 926 732-92-78
 </a>
+
+<style>
+  /* ---- правки 20.11: левая колонка на главном экране ---- */
+  .hero__copy { max-width: 44rem; right: auto; }
+  .v-page .hero__title { text-align: left; margin-left: 0; max-width: none; }
+  .hero__copy .hero__label { font-size: clamp(1.05rem, 1rem + .6vw, 1.45rem); opacity: 1; letter-spacing: .04em; }
+  .hero__subline { margin: .35em 0 0; font-size: clamp(1rem, .9rem + .55vw, 1.35rem); font-weight: 500; color: var(--v-ink); opacity: .95; text-shadow: 0 1px 10px rgb(0 0 0 / .6); }
+  .hero__schedule { margin: .5em 0 0; font-size: var(--v-t-sm, .95rem); color: var(--v-ink); opacity: .85; text-shadow: 0 1px 10px rgb(0 0 0 / .6); }
+  .hero__note { display: none; }
+  @media (max-width: 860px) { .hero__copy { max-width: none; } }
+
+  /* ---- плавающая кнопка записи ---- */
+  .book-fab { position: fixed; left: 12px; bottom: 58px; z-index: 9998; display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border: 0; border-radius: 999px; cursor: pointer; background: var(--v-accent, #7cc0ff); color: #07131f; font: 600 1rem/1 "Rubik", system-ui, sans-serif; box-shadow: 0 10px 30px rgb(0 0 0 / .5); transition: transform .15s ease, filter .15s ease; }
+  .book-fab:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .book-fab:active { transform: scale(.97); }
+
+  /* ---- модальный календарь записи ---- */
+  .bk { position: fixed; inset: 0; z-index: 10000; display: none; font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; }
+  .bk.open { display: block; }
+  .bk__veil { position: absolute; inset: 0; background: rgb(3 6 10 / .74); backdrop-filter: blur(4px); }
+  .bk__panel { position: absolute; left: 50%; top: 3.5vh; transform: translateX(-50%); width: min(700px, 94vw); max-height: 93vh; overflow-y: auto; background: #151b23; border: 1px solid rgb(255 255 255 / .12); border-radius: 14px; padding: 24px 24px 30px; color: #eef2f6; box-shadow: 0 30px 80px rgb(0 0 0 / .6); }
+  .bk__x { position: absolute; top: 10px; right: 12px; width: 40px; height: 40px; border: 0; border-radius: 10px; background: transparent; color: #9aa6b2; font-size: 26px; cursor: pointer; }
+  .bk__x:hover { background: rgb(255 255 255 / .08); color: #fff; }
+  .bk__title { margin: 0; font: 700 1.5rem/1.2 "Rubik", system-ui, sans-serif; }
+  .bk__sub { margin: .4em 0 1.2em; color: #9aa6b2; font-size: .95rem; }
+  .bk__h { margin: 1.4em 0 .6em; font: 600 1.05rem/1.3 "Rubik", system-ui, sans-serif; color: #7cc0ff; }
+  .bk__calhead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .bk__calhead b { font-size: 1.05rem; text-transform: capitalize; }
+  .bk__calhead button { width: 40px; height: 40px; border: 1px solid rgb(255 255 255 / .15); border-radius: 10px; background: transparent; color: #eef2f6; font-size: 20px; cursor: pointer; }
+  .bk__calhead button:hover { background: rgb(255 255 255 / .08); }
+  .bk__cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+  .bk__wd { text-align: center; font-size: .78rem; color: #9aa6b2; padding: 4px 0; text-transform: uppercase; }
+  .bk__cell { aspect-ratio: 1.15; border: 1px solid rgb(255 255 255 / .1); border-radius: 9px; background: #1a222c; color: #eef2f6; font-size: .95rem; cursor: pointer; }
+  .bk__cell:hover:not(:disabled) { border-color: #7cc0ff; }
+  .bk__cell--empty { background: transparent; border-color: transparent; cursor: default; }
+  .bk__cell--dis { opacity: .28; cursor: default; }
+  .bk__cell--today { border-color: rgb(124 192 255 / .55); }
+  .bk__cell--sel { background: #7cc0ff; color: #07131f; font-weight: 700; border-color: #7cc0ff; }
+  .bk__master { margin: 0 0 10px; font-size: .98rem; }
+  .bk__master b { color: #4de3c1; }
+  .bk__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 7px; }
+  .bk__slot { padding: 9px 4px; border: 1px solid rgb(255 255 255 / .14); border-radius: 9px; background: #1a222c; color: #eef2f6; font-size: .92rem; cursor: pointer; }
+  .bk__slot:hover:not(:disabled) { border-color: #7cc0ff; }
+  .bk__slot--busy { opacity: .35; text-decoration: line-through; cursor: default; }
+  .bk__slot--sel { background: #7cc0ff; color: #07131f; font-weight: 700; border-color: #7cc0ff; }
+  .bk__hint { color: #9aa6b2; font-size: .93rem; }
+  .bk__form { margin-top: 14px; padding: 16px; border: 1px solid rgb(124 192 255 / .35); border-radius: 12px; background: rgb(124 192 255 / .06); }
+  .bk__form p { margin: 0 0 12px; font-size: .97rem; }
+  .bk__form b { color: #4de3c1; }
+  .bk__form label { display: block; margin-bottom: 10px; font-size: .85rem; color: #9aa6b2; }
+  .bk__form input { display: block; width: 100%; box-sizing: border-box; margin-top: 4px; padding: 10px 12px; border: 1px solid rgb(255 255 255 / .18); border-radius: 9px; background: #10161d; color: #eef2f6; font-size: 1rem; }
+  .bk__form input:focus { outline: none; border-color: #7cc0ff; }
+  .bk__ok { display: inline-block; margin-top: 6px; padding: 11px 20px; border: 0; border-radius: 999px; background: #7cc0ff; color: #07131f; font: 600 .98rem/1 "Rubik", system-ui, sans-serif; cursor: pointer; }
+  .bk__ok:hover { filter: brightness(1.08); }
+  .bk__done { margin-top: 12px; padding: 12px 14px; border-radius: 10px; background: rgb(77 227 193 / .12); border: 1px solid rgb(77 227 193 / .4); color: #4de3c1; font-size: .95rem; }
+  .bk__table table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  .bk__table th { text-align: left; padding: 8px 8px; color: #9aa6b2; font-weight: 500; border-bottom: 1px solid rgb(255 255 255 / .12); white-space: nowrap; }
+  .bk__table td { padding: 8px 8px; border-bottom: 1px solid rgb(255 255 255 / .06); }
+  @media (max-width: 560px) { .bk__panel { padding: 18px 14px 24px; } .bk__table { overflow-x: auto; } }
+</style>
+
+<button class="book-fab" type="button" data-book-open>Записаться на диагностику</button>
+
+<div class="bk" id="bk" role="dialog" aria-modal="true" aria-label="Запись на диагностику">
+  <div class="bk__veil" data-bk-close></div>
+  <div class="bk__panel">
+    <button class="bk__x" type="button" data-bk-close aria-label="Закрыть">&times;</button>
+    <h2 class="bk__title">Запись на диагностику</h2>
+    <p class="bk__sub">Ежедневно 9:00–21:00 · интервал обслуживания 45 минут · два мастера посменно</p>
+    <div class="bk__calhead">
+      <button type="button" id="bkPrev" aria-label="Предыдущий месяц">&lsaquo;</button>
+      <b id="bkMonth"></b>
+      <button type="button" id="bkNext" aria-label="Следующий месяц">&rsaquo;</button>
+    </div>
+    <div class="bk__cal" id="bkCal"></div>
+    <h3 class="bk__h">Свободное время</h3>
+    <div id="bkSlots"><p class="bk__hint">Сначала выберите дату в календаре выше.</p></div>
+    <div id="bkForm"></div>
+    <h3 class="bk__h">Сводная таблица смен</h3>
+    <div class="bk__table" id="bkTable"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var MASTERS = [
+    { name: "Андрей Громов", role: "автослесарь", days: [1, 3, 5, 0] },
+    { name: "Денис Савельев", role: "автослесарь", days: [2, 4, 6] }
+  ];
+  var OPEN_H = 9, CLOSE_H = 21, STEP = 45;
+  var KEY = "prosvet_bookings_v1", SEED = "prosvet_seed_v1";
+  var MONTHS = ["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"];
+  var WD = ["пн","вт","ср","чт","пт","сб","вс"];
+
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function iso(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+  function parseISO(s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function masterFor(d) { var g = d.getDay(); for (var i = 0; i < MASTERS.length; i++) if (MASTERS[i].days.indexOf(g) > -1) return MASTERS[i]; return MASTERS[0]; }
+  function slotList() { var r = [], t = OPEN_H * 60; while (t + STEP <= CLOSE_H * 60) { r.push(pad(Math.floor(t / 60)) + ":" + pad(t % 60)); t += STEP; } return r; }
+  function load() { try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (e) { return []; } }
+  function save(b) { localStorage.setItem(KEY, JSON.stringify(b)); }
+
+  /* демо-записи, чтобы сразу было видно занятые слоты */
+  if (!localStorage.getItem(SEED)) {
+    var s = [], d1 = new Date(), d2 = new Date(), d3 = new Date();
+    d1.setDate(d1.getDate() + 1); d2.setDate(d2.getDate() + 2); d3.setDate(d3.getDate() + 3);
+    s.push({ date: iso(d1), time: "10:30", name: "Игорь", plate: "А 123 ВС 750", master: masterFor(d1).name });
+    s.push({ date: iso(d1), time: "14:15", name: "Марина", plate: "Е 456 КХ 750", master: masterFor(d1).name });
+    s.push({ date: iso(d2), time: "09:45", name: "Олег", plate: "М 789 ОР 750", master: masterFor(d2).name });
+    s.push({ date: iso(d3), time: "18:00", name: "Светлана", plate: "Н 321 ТУ 750", master: masterFor(d3).name });
+    save(s); localStorage.setItem(SEED, "1");
+  }
+
+  var modal = document.getElementById("bk"),
+      calEl = document.getElementById("bkCal"),
+      slotsEl = document.getElementById("bkSlots"),
+      formEl = document.getElementById("bkForm"),
+      tableEl = document.getElementById("bkTable"),
+      monthEl = document.getElementById("bkMonth"),
+      selDate = null, selTime = null,
+      viewDate = new Date(); viewDate.setDate(1);
+
+  function renderCal() {
+    var y = viewDate.getFullYear(), m = viewDate.getMonth();
+    monthEl.textContent = MONTHS[m] + " " + y;
+    var off = (new Date(y, m, 1).getDay() + 6) % 7;
+    var days = new Date(y, m + 1, 0).getDate();
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var maxD = new Date(today); maxD.setDate(maxD.getDate() + 60);
+    var html = "";
+    WD.forEach(function (w) { html += '<span class="bk__wd">' + w + "</span>"; });
+    for (var i = 0; i < off; i++) html += '<span class="bk__cell bk__cell--empty"></span>';
+    for (var d = 1; d <= days; d++) {
+      var dt = new Date(y, m, d), dis = dt < today || dt > maxD, cls = "bk__cell";
+      if (dis) cls += " bk__cell--dis";
+      if (selDate === iso(dt)) cls += " bk__cell--sel";
+      else if (iso(dt) === iso(today)) cls += " bk__cell--today";
+      html += '<button type="button" class="' + cls + '" data-d="' + iso(dt) + '"' + (dis ? " disabled" : "") + ">" + d + "</button>";
+    }
+    calEl.innerHTML = html;
+  }
+
+  function renderSlots() {
+    if (!selDate) { slotsEl.innerHTML = '<p class="bk__hint">Сначала выберите дату в календаре выше.</p>'; return; }
+    var dt = parseISO(selDate), mst = masterFor(dt), now = new Date();
+    var dayB = load().filter(function (b) { return b.date === selDate; });
+    var html = '<p class="bk__master">' + dt.getDate() + " " + MONTHS[dt.getMonth()] + " · мастер смены: <b>" + mst.name + "</b> (" + mst.role + ')</p><div class="bk__grid">';
+    slotList().forEach(function (t) {
+      var busy = dayB.some(function (b) { return b.time === t; });
+      var past = selDate === iso(now) && (parseInt(t.slice(0, 2), 10) * 60 + parseInt(t.slice(3), 10)) <= now.getHours() * 60 + now.getMinutes() + STEP;
+      var cls = "bk__slot";
+      if (busy || past) cls += " bk__slot--busy";
+      if (selTime === t && !busy && !past) cls += " bk__slot--sel";
+      html += '<button type="button" class="' + cls + '" data-t="' + t + '"' + ((busy || past) ? " disabled" : "") + ">" + t + "</button>";
+    });
+    slotsEl.innerHTML = html + "</div>";
+  }
+
+  function renderForm() {
+    if (!selDate || !selTime) { formEl.innerHTML = ""; return; }
+    var dt = parseISO(selDate), mst = masterFor(dt);
+    formEl.innerHTML =
+      '<div class="bk__form"><p>Вы записываетесь: <b>' + dt.getDate() + " " + MONTHS[dt.getMonth()] + ", " + selTime + "</b> · мастер <b>" + mst.name + '</b></p>' +
+      '<form id="bkGo"><label>Ваше имя<input id="bkName" type="text" required maxlength="40" placeholder="Например, Константин" autocomplete="name"></label>' +
+      '<label>Госномер автомобиля<input id="bkPlate" type="text" required maxlength="15" placeholder="А 000 АА 750"></label>' +
+      '<button class="bk__ok" type="submit">Подтвердить запись</button></form></div>';
+    document.getElementById("bkGo").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = document.getElementById("bkName").value.trim();
+      var plate = document.getElementById("bkPlate").value.trim();
+      if (!name || !plate) return;
+      var b = load();
+      b.push({ date: selDate, time: selTime, name: name, plate: plate.toUpperCase(), master: masterFor(parseISO(selDate)).name });
+      save(b);
+      formEl.innerHTML = '<div class="bk__done">Готово! Вы записаны на ' + dt.getDate() + " " + MONTHS[dt.getMonth()] + " в " + selTime + ", мастер " + mst.name + ". Запись хранится в этом браузере (демо-режим).</div>";
+      selTime = null;
+      renderSlots(); renderTable();
+    });
+  }
+
+  function renderTable() {
+    var b = load().slice().sort(function (x, y) { return (x.date + x.time).localeCompare(y.date + y.time); });
+    if (!b.length) { tableEl.innerHTML = '<p class="bk__hint">Записей пока нет.</p>'; return; }
+    var html = "<table><thead><tr><th>Дата</th><th>Время</th><th>Клиент</th><th>Госномер</th><th>Мастер</th></tr></thead><tbody>";
+    b.forEach(function (r) {
+      var dt = parseISO(r.date);
+      html += "<tr><td>" + dt.getDate() + " " + MONTHS[dt.getMonth()].slice(0, 3) + ".</td><td>" + r.time + "</td><td>" + esc(r.name) + "</td><td>" + esc(r.plate) + "</td><td>" + esc(r.master) + "</td></tr>";
+    });
+    tableEl.innerHTML = html + "</tbody></table>";
+  }
+
+  function renderAll() { renderCal(); renderSlots(); renderForm(); renderTable(); }
+
+  document.querySelectorAll("[data-book-open]").forEach(function (el) {
+    el.addEventListener("click", function (e) { e.preventDefault(); modal.classList.add("open"); document.body.style.overflow = "hidden"; renderAll(); });
+  });
+  modal.querySelectorAll("[data-bk-close]").forEach(function (el) {
+    el.addEventListener("click", function () { modal.classList.remove("open"); document.body.style.overflow = ""; });
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { modal.classList.remove("open"); document.body.style.overflow = ""; } });
+  document.getElementById("bkPrev").addEventListener("click", function () { viewDate.setMonth(viewDate.getMonth() - 1); renderCal(); });
+  document.getElementById("bkNext").addEventListener("click", function () { viewDate.setMonth(viewDate.getMonth() + 1); renderCal(); });
+  calEl.addEventListener("click", function (e) { var b = e.target.closest("[data-d]"); if (!b || b.disabled) return; selDate = b.getAttribute("data-d"); selTime = null; renderCal(); renderSlots(); renderForm(); });
+  slotsEl.addEventListener("click", function (e) { var b = e.target.closest("[data-t]"); if (!b || b.disabled) return; selTime = b.getAttribute("data-t"); renderSlots(); renderForm(); });
+})();
+</script>
 </body></html>
